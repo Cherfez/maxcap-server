@@ -1,32 +1,27 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("users", {
+    return queryInterface.createTable("timeslots", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      weekday: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
+      startTime: {
+        type: Sequelize.DECIMAL,
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      endTime: {
+        type: Sequelize.DECIMAL,
       },
-      phone: {
+      gymId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
       },
-      isBelayer: {
-        type: Sequelize.BOOLEAN,
+      maxCap: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +34,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("users");
+    return queryInterface.dropTable("timeslots");
   },
 };
