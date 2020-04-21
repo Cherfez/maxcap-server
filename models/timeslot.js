@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   timeslot.associate = function (models) {
-    timeslot.belongsTo(models.booking);
     timeslot.belongsTo(models.gym);
   };
   return timeslot;

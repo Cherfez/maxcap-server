@@ -126,6 +126,10 @@ const authMiddleWare = require("./auth/middleware");
 const gymsRouter = require("./routers/gyms");
 app.use("/gyms", gymsRouter);
 
+//ROUTE for getting timeslots
+const timeslotsRouter = require("./routers/timeslots");
+app.use("/timeslots", timeslotsRouter);
+
 const authRouter = require("./routers/auth");
 app.use("/", authRouter);
 
