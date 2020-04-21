@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   booking.associate = function (models) {
     booking.belongsTo(models.user);
-    booking.hasOne(models.timeslot);
+    booking.belongsTo(models.timeslot);
+    booking.belongsTo(models.gym);
   };
   return booking;
 };
