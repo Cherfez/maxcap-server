@@ -48,6 +48,24 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        weekday: "Monday",
+        startTime: 20.0,
+        endTime: 22.0,
+        gymId: 2,
+        maxCap: 10,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        weekday: "Monday",
+        startTime: 20.0,
+        endTime: 22.0,
+        gymId: 3,
+        maxCap: 10,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ];
 
     return queryInterface.bulkInsert("timeslots", timeslots, {});
