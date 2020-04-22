@@ -22,7 +22,14 @@ router.get("/:id", async (req, res, next) => {
       include: [
         {
           model: Timeslot,
-          attributes: ["weekday", "startTime", "endTime", "gymId", "maxCap"],
+          attributes: [
+            "id",
+            "weekday",
+            "startTime",
+            "endTime",
+            "gymId",
+            "maxCap",
+          ],
           where: { gymId: id },
         },
       ],
