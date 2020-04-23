@@ -20,13 +20,7 @@ router.post("/", auth, async (req, res, next) => {
       return res.status(400).send({ message: "Not logged in!" });
     }
     const { namePartner, timeslotId, gymId } = req.body;
-    console.log("namePartner", namePartner);
-    // if (!comment) {
-    //   return res.status(400).send({ message: "Invalid comment" });
-    // }
-    // if (!serviceId) {
-    //   return res.status(400).send({ message: "Service not found" });
-    // }
+    // console.log("namePartner", namePartner);
 
     const booking = await Bookings.create({
       userId: req.user.id,
