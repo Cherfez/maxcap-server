@@ -4,7 +4,15 @@ module.exports = (sequelize, DataTypes) => {
     "booking",
     {
       userId: DataTypes.INTEGER,
-      namePartner: DataTypes.STRING,
+      namePartner: {
+        type: DataTypes.STRING,
+        get: function () {
+          return JSON.parse(this.getDataValue("namePartner"));
+        },
+        set: function (val) {
+          return this.setDataValue("namePartner", JSON.stringify(val));
+        },
+      },
       timeslotId: DataTypes.INTEGER,
       gymId: DataTypes.INTEGER,
     },
