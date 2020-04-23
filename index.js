@@ -130,6 +130,10 @@ app.use("/gyms", gymsRouter);
 const timeslotsRouter = require("./routers/timeslots");
 app.use("/timeslots", timeslotsRouter);
 
+//ROUTE for getting bookings
+const bookingsRouter = require("./routers/bookings");
+app.use("/bookings", bookingsRouter);
+
 const authRouter = require("./routers/auth");
 app.use("/", authRouter);
 
