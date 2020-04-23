@@ -4,10 +4,28 @@ const Bookings = require("../models").booking;
 
 const router = new Router();
 
-router.get("/", async (req, res, next) => {
+// router.get("/", async (req, res, next) => {
+//   try {
+//     const bookings = await Bookings.findAll();
+//     // console.log("bookings", bookings);
+//     res.status(200).send(bookings);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
+
+router.get("/", auth, async (req, res, next) => {
   try {
-    const bookings = await Bookings.findAll();
+    if (req.user.id === null) {
+      return res.status(400).send({ message: "Not logged in!" });
+    }
+    const bookings = await Bookings.findAll({
+      where: { userId: req.user.id },
+    });
     // console.log("bookings", bookings);
+    if (bookings === null) {
+      return res.status(400).send({ message: "Bookings does not exist!" });
+    }
     res.status(200).send(bookings);
   } catch (e) {
     next(e);
@@ -21,12 +39,6 @@ router.post("/", auth, async (req, res, next) => {
     }
     const { namePartner, timeslotId, gymId } = req.body;
     console.log("namePartner", namePartner);
-    // if (!comment) {
-    //   return res.status(400).send({ message: "Invalid comment" });
-    // }
-    // if (!serviceId) {
-    //   return res.status(400).send({ message: "Service not found" });
-    // }
 
     const booking = await Bookings.create({
       userId: req.user.id,
