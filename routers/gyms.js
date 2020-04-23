@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Gyms = require("../models").gym;
+const Timeslot = require("../models").timeslot;
 
 const router = new Router();
 
@@ -17,7 +18,22 @@ router.get("/:id", async (req, res, next) => {
       return res.status(400).send({ message: "Gym id is not a number" });
     }
 
-    const gym = await Gyms.findByPk(id);
+    const gym = await Gyms.findByPk(id, {
+      include: [
+        {
+          model: Timeslot,
+          attributes: [
+            "id",
+            "weekday",
+            "startTime",
+            "endTime",
+            "gymId",
+            "maxCap",
+          ],
+          where: { gymId: id },
+        },
+      ],
+    });
 
     if (gym === null) {
       return res.status(404).send({ message: "Gym not found" });
