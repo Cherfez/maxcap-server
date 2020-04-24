@@ -5,7 +5,8 @@
     "database": "MaxCap_development",
     "host": "localhost",
     "dialect": "postgres",
-    "operatorsAliases": "0"
+    "operatorsAliases": "0",
+    "logging": false
   },
   "test": {
     "username": "root",
