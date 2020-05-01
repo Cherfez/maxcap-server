@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
   res.status(200).send(gyms);
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id/booking", async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -30,7 +30,6 @@ router.get("/:id", async (req, res, next) => {
             "gymId",
             "maxCap",
           ],
-          where: { gymId: id },
         },
       ],
     });
