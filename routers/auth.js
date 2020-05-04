@@ -5,6 +5,8 @@ const authMiddleware = require("../auth/middleware");
 const User = require("../models/").user;
 const { SALT_ROUNDS } = require("../config/constants");
 const Booking = require("../models").booking;
+const Gym = require("../models").gym;
+const Timeslot = require("../models").timeslot;
 
 const router = new Router();
 
@@ -82,6 +84,16 @@ router.get("/me", authMiddleware, async (req, res) => {
 
   const bookings = await Booking.findAll({
     where: { userId: req.user.dataValues.id },
+    include: [
+      {
+        model: Gym,
+        attributes: ["name"],
+      },
+      {
+        model: Timeslot,
+        attributes: ["weekday", "startTime", "endTime"],
+      },
+    ],
   });
   // console.log("bookings", bookings[0].dataValues);
   res.status(200).send({ ...req.user.dataValues, bookings });
