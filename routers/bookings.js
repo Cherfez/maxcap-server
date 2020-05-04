@@ -6,35 +6,34 @@ const Timeslot = require("../models").timeslot;
 
 const router = new Router();
 
-router.get("/", auth, async (req, res, next) => {
-  console.log("hi", req.dataValue);
-  try {
-    if (req.user.id === null) {
-      return res.status(400).send({ message: "Not logged in!" });
-    }
-    const bookings = await Bookings.findAll({
-      where: { userId: req.user.id },
-      include: [
-        {
-          model: Gym,
-          as: "Instruments",
-          attributes: ["name"],
-        },
-        {
-          model: Timeslot,
-          attributes: ["weekday", "startTime", "endTime"],
-        },
-      ],
-    });
-    console.log("bookings", bookings);
-    if (bookings === null) {
-      return res.status(400).send({ message: "Bookings does not exist!" });
-    }
-    res.status(200).send(bookings);
-  } catch (e) {
-    next(e);
-  }
-});
+// router.get("/", auth, async (req, res, next) => {
+//   console.log("hi", req.dataValue);
+//   try {
+//     if (req.user.id === null) {
+//       return res.status(400).send({ message: "Not logged in!" });
+//     }
+//     const bookings = await Bookings.findAll({
+//       where: { userId: req.user.id },
+//       include: [
+//         {
+//           model: Gym,
+//           attributes: ["name"],
+//         },
+//         {
+//           model: Timeslot,
+//           attributes: ["weekday", "startTime", "endTime"],
+//         },
+//       ],
+//     });
+//     console.log("bookings", bookings);
+//     if (bookings === null) {
+//       return res.status(400).send({ message: "Bookings does not exist!" });
+//     }
+//     res.status(200).send(bookings);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 
 // router.get("/all", async (req, res, next) => {
 //   try {
@@ -51,7 +50,7 @@ router.post("/", auth, async (req, res, next) => {
     if (req.user.id === null) {
       return res.status(400).send({ message: "Not logged in!" });
     }
-    const { namePartner, timeslotId, gymId } = req.body;
+    const { namePartner, timeslotId, gymId, pickedDate } = req.body;
     // console.log("namePartner", namePartner);
 
     const booking = await Bookings.create({
@@ -59,19 +58,25 @@ router.post("/", auth, async (req, res, next) => {
       namePartner,
       timeslotId,
       gymId,
+      pickedDate,
     });
     // console.log("booking", booking.dataValues.timeslotId);
     const timeslots = await Bookings.findAll({
       where: { timeslotId: booking.dataValues.timeslotId },
     });
     // console.log("timeslots", timeslots[0].dataValues.timeslotId);
-    const totalClimbers = timeslots.map((total) => {
-      return total.dataValues.namePartner.split("[ ]").pop();
+    const climbingPartners = timeslots.map((total) => {
+      // return total.dataValues.namePartner;
+      return total.namePartner.length + 1;
     });
-    console.log("totalClimbers", totalClimbers);
+    // console.log("climbingPartners", climbingPartners);
+    const totalClimbersPerSlot = climbingPartners.reduce(
+      (acc, curr) => acc + curr
+    );
+    // console.log("tot", totalClimbersPerSlot);
     const maxCap = await Timeslot.findByPk(timeslots[0].dataValues.timeslotId);
     // console.log("max", maxCap.dataValues.maxCap);
-    if (timeslots.length > maxCap.dataValues.maxCap) {
+    if (totalClimbersPerSlot > maxCap.dataValues.maxCap) {
       return res.status(418).send({ message: "MaxCap reached" });
     }
 
