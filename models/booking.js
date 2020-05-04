@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       timeslotId: DataTypes.INTEGER,
       gymId: DataTypes.INTEGER,
+      pickedDate: DataTypes.STRING,
     },
     {}
   );
