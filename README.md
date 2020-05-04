@@ -1,42 +1,20 @@
-# Server template
+# MaxCap.
 
-This is a simple server template to for my students to start projects quickly.
+A booking app for climbing gyms during the COVID-19 period. This app will help manage the max capacity problem climbing gyms may face during the current regulations.
 
-## Table of contents:
-
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Endpoints](#endpoints)**
-- **[Sample requests with axios](#sample-requests-with-axios)**
-- **[Sample requests with httpie](#sample-requests-with-httpie)**
-- **[History of this project (pullrequests)](#history-of-this-project)**
+This is the code for the server side. For the client side code, see [https://github.com/Cherfez/maxcap-client](https://github.com/Cherfez/maxcap-client)
 
 ## SETUP How to use this template
 
 1. Create a new project based on this template using the `Use this template` button
-
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
-
 2. Clone the app
-
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
-
+   `git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git`
 3. cd into your project
-
-```
-cd YOUR_PROJECT_NAME
-```
-
+   `cd YOUR_PROJECT_NAME`
 4. install dependencies
-
-```
-npm install
-```
-
+   `npm install`
 5. Configure your database in `config/config.json`
-
-The default assumes a postgres database with
+   The default assumes a postgres database with
 
 - username: postgres
 - password: secret
@@ -56,14 +34,9 @@ The default assumes a postgres database with
 ```
 
 6. Create database, run migrations & seed data
-
-`package.json` contains a script for this
-
-```bash
-npm run initdev
-```
-
-Or run the commands seperately
+   `package.json` contains a script for this
+   `npm run initdev`
+   Or run the commands seperately
 
 ```bash
 npx sequelize-cli db:create
@@ -72,58 +45,22 @@ npx sequelize-cli db:seed:all
 ```
 
 7. start server with `nodemon` (recommended for development)
-
-```
-npm run dev
-```
-
+   `npm run dev`
 8. or start normally
+   `npm start`
 
-```
-npm start
-```
+## Built With
 
-## Endpoints
+- Express - To setup server
+- Node.js - To keep it going smooth
+  Full list:
+  To see all the dependencies, see the `package.json` file
 
-| Method | Path                       | Purpose                             | required parameters   | auth |
-| ------ | -------------------------- | ----------------------------------- | --------------------- | ---- |
-| GET    | '/'                        | Test if your server is running      | none                  | no   |
-| POST   | '/echo'                    | Test POST requests                  | none                  | no   |
-| POST   | '/signup'                  | Create a new user and get a token   | email, name, password | no   |
-| POST   | '/login'                   | Get a token with email & password   | email, password       | no   |
-| GET    | '/me'                      | Get information of this user        | none                  | yes  |
-| POST   | '/authorized_post_request' | Test POST requests (token required) | none                  | yes  |
+## Acknowledgments
 
-## Sample requests with axios
+Hat tip to all the Codaisseur teachers and other staff at Codaisseur!
 
-To demo making request to this server, some small script are included that make requests using `axios`
+## Project status
 
-The scripts can be found in [/sampleRequests](./sampleRequests)
-
-1. Make sure to follow the the setup in this readme first
-2. cd sampleRequests
-3. Run example requests
-
-```
-node hello.js
-node echo.js
-node signup.js
-node login.js
-node me.js
-node authorizedPost.js
-```
-
-## Sample requests with httpie
-
-To demo making request to this server, bash commands are included that make requests using `httpie`
-
-They can found in [./sampleRequests/httpie.md](./sampleRequests/httpie.md)
-
-## History of this project
-
-- [Setup of the server](https://github.com/Codaisseur/express-template/commit/cd2f790fbab6c561300163466a074fd09a35f704)
-- [Adding a README](https://github.com/Codaisseur/express-template/pull/1)
-- [Setting up the Database](https://github.com/Codaisseur/express-template/pull/2)
-- [Signup, Login & auth middleware](https://github.com/Codaisseur/express-template/pull/3)
-- [Configure cors](https://github.com/Codaisseur/express-template/pull/4)
-- [Seed using models & add delay middleware](https://github.com/Codaisseur/express-template/pull/5)
+MaxCap. is currently still being improved. The live version can be seen at: <br/>
+LINK TO DEPLOY WILL SOON BE ONLINE!<br/>
