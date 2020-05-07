@@ -14,31 +14,11 @@ const router = new Router();
 //     }
 //     const bookings = await Bookings.findAll({
 //       where: { userId: req.user.id },
-//       include: [
-//         {
-//           model: Gym,
-//           attributes: ["name"],
-//         },
-//         {
-//           model: Timeslot,
-//           attributes: ["weekday", "startTime", "endTime"],
-//         },
-//       ],
 //     });
 //     console.log("bookings", bookings);
 //     if (bookings === null) {
 //       return res.status(400).send({ message: "Bookings does not exist!" });
 //     }
-//     res.status(200).send(bookings);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-// router.get("/all", async (req, res, next) => {
-//   try {
-//     const bookings = await Bookings.findAll();
-//     // console.log("bookings", bookings);
 //     res.status(200).send(bookings);
 //   } catch (e) {
 //     next(e);
@@ -81,6 +61,26 @@ router.post("/", auth, async (req, res, next) => {
     }
 
     return res.status(201).send({ message: "Booking added", booking });
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.delete("/:bookingId", auth, async (req, res, next) => {
+  const { bookingId } = req.params;
+  // console.log("id from router", bookingId);
+  try {
+    const booking = await Bookings.findByPk(bookingId);
+
+    if (!booking) {
+      return res.status(404).send("Booking not found");
+    }
+
+    const result = await booking.destroy();
+    // console.log("result", result);
+
+    // res.json({ bookingId });
+    return res.status(201).send({ message: "Booking deleted", booking });
   } catch (e) {
     next(e);
   }
