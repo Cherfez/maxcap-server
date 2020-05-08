@@ -6,24 +6,40 @@ const Timeslot = require("../models").timeslot;
 
 const router = new Router();
 
-// router.get("/", auth, async (req, res, next) => {
-//   console.log("hi", req.dataValue);
-//   try {
-//     if (req.user.id === null) {
-//       return res.status(400).send({ message: "Not logged in!" });
-//     }
-//     const bookings = await Bookings.findAll({
-//       where: { userId: req.user.id },
-//     });
-//     console.log("bookings", bookings);
-//     if (bookings === null) {
-//       return res.status(400).send({ message: "Bookings does not exist!" });
-//     }
-//     res.status(200).send(bookings);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
+router.get("/:userId", async (req, res, next) => {
+  // console.log("hi", req.dataValue);
+  try {
+    const { userId } = req.params;
+    // console.log("id", userId);
+
+    if (userId === null) {
+      return res.status(400).send({ message: "Not logged in!" });
+    }
+
+    const bookings = await Bookings.findAll({
+      where: { userId: userId },
+      include: [
+        {
+          model: Gym,
+          attributes: ["name"],
+        },
+        {
+          model: Timeslot,
+          attributes: ["weekday", "startTime", "endTime"],
+        },
+      ],
+    });
+    // console.log("bookings", bookings);
+
+    if (bookings === null) {
+      return res.status(400).send({ message: "Bookings does not exist!" });
+    }
+
+    res.status(200).send(bookings);
+  } catch (e) {
+    next(e);
+  }
+});
 
 router.post("/", auth, async (req, res, next) => {
   try {
@@ -79,8 +95,7 @@ router.delete("/:bookingId", auth, async (req, res, next) => {
     const result = await booking.destroy();
     // console.log("result", result);
 
-    // res.json({ bookingId });
-    return res.status(201).send({ message: "Booking deleted", booking });
+    return res.status(201).send({ message: "Booking deleted", bookingId });
   } catch (e) {
     next(e);
   }
