@@ -118,9 +118,9 @@ const authMiddleWare = require("./auth/middleware");
  */
 
 // GET endpoint for testing purposes, can be removed
-// app.get("/", (req, res) => {
-//   res.send("Hi from express");
-// });
+app.get("/", (req, res) => {
+  res.send("Hi from express");
+});
 
 //ROUTE for getting gyms
 const gymsRouter = require("./routers/gyms");
