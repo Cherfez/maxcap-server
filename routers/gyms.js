@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const Gyms = require("../models").gym;
 const Timeslot = require("../models").timeslot;
+const Bookings = require("../models").booking;
 
 const router = new Router();
 
@@ -38,7 +39,12 @@ router.get("/:id/booking", async (req, res, next) => {
       return res.status(404).send({ message: "Gym not found" });
     }
 
-    res.status(200).send({ message: "ok", gym });
+    const bookings = await Bookings.findAll({
+      where: { gymId: id },
+    });
+    // console.log("bookings", bookings);
+
+    res.status(200).send({ message: "ok", gym, bookings });
   } catch (e) {
     next(e);
   }

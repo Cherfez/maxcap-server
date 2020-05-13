@@ -82,21 +82,7 @@ router.get("/me", authMiddleware, async (req, res) => {
   // don't send back the password hash
   delete req.user.dataValues["password"];
 
-  const bookings = await Booking.findAll({
-    where: { userId: req.user.dataValues.id },
-    include: [
-      {
-        model: Gym,
-        attributes: ["name"],
-      },
-      {
-        model: Timeslot,
-        attributes: ["weekday", "startTime", "endTime"],
-      },
-    ],
-  });
-  // console.log("bookings", bookings[0].dataValues);
-  res.status(200).send({ ...req.user.dataValues, bookings });
+  res.status(200).send({ ...req.user.dataValues });
 });
 
 module.exports = router;
