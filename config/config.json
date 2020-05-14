@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "secret",
     "database": "MaxCap_development",
-    "host": "localhost",
+    "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": "0",
     "logging": false
@@ -11,18 +11,12 @@
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "projectdb",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": "0"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": "0",
     "use_env_variable": "DATABASE_URL"
   }
 }
