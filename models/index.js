@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const Sequelize = require("sequelize"),
+let Sequelize = require("sequelize"),
   sequelize = null;
 const http = require("http");
 const basename = path.basename(__filename);
