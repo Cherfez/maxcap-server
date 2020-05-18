@@ -63,4 +63,6 @@ Hat tip to all the Codaisseur teachers and other staff at Codaisseur!
 ## Project status
 
 MaxCap. is currently still being improved. The live version can be seen at: <br/>
-LINK TO DEPLOY WILL SOON BE ONLINE!<br/>
+[https://maxcap.netlify.app/](https://maxcap.netlify.app/) <br/>
+The server is uploaded on Heroku and can be visited at: <br/>
+[https://maxcap.herokuapp.com/](https://maxcap.herokuapp.com/)
