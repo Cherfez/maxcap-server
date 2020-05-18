@@ -5,8 +5,7 @@
     "database": "MaxCap_development",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": "0",
-    "logging": false
+    "operatorsAliases": "0"
   },
   "test": {
     "username": "root",
@@ -17,6 +16,12 @@
     "operatorsAliases": "0"
   },
   "production": {
+    "username": "postgres",
+    "password": "secret",
+    "database": "MaxCap_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": "0",
     "use_env_variable": "DATABASE_URL"
   }
 }
