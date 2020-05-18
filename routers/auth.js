@@ -5,8 +5,6 @@ const authMiddleware = require("../auth/middleware");
 const User = require("../models/").user;
 const { SALT_ROUNDS } = require("../config/constants");
 const Booking = require("../models").booking;
-const Gym = require("../models").gym;
-const Timeslot = require("../models").timeslot;
 
 const router = new Router();
 
@@ -45,16 +43,17 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { email, password, name, phone, certified } = req.body;
+  const { name, email, password, phone, certified } = req.body;
+
   if (!email || !password || !name || !phone) {
     return res.status(400).send("Please provide an email, password and a name");
   }
 
   try {
     const newUser = await User.create({
+      name,
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
-      name,
       phone,
       certified,
     });

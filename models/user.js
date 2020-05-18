@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      isBelayer: {
+      certified: {
         type: DataTypes.BOOLEAN,
       },
     },

@@ -42,7 +42,6 @@ router.get("/:id/booking", async (req, res, next) => {
     const bookings = await Bookings.findAll({
       where: { gymId: id },
     });
-    // console.log("bookings", bookings);
 
     res.status(200).send({ message: "ok", gym, bookings });
   } catch (e) {
